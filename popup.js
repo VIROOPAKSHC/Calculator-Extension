@@ -2,7 +2,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const calculateButton = document.getElementById("calculateButton");
-  const selectedExpression = document.getElementById("selectedExpression");
   const resultElement = document.getElementById("result");
 
   // Listen for the "Calculate" button click
@@ -15,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         function: getSelectedText,
       },
       (selectedText) => {
-        selectedExpression.textContent = "Selected Expression: ".concat(((selectedText)));
+        // selectedExpression.textContent = "Selected Expression: ".concat(((selectedText)));
         try {
           const result = calculateSelectedExpression(selectedText);
           resultElement.textContent = `Result: ${result}`;
@@ -33,11 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to calculate the selected expression
 function calculateSelectedExpression(selectedText) {
+  
+  var selectedTex = JSON.parse(JSON.stringify(selectedText).substr(1,JSON.stringify(selectedText).length-2).toString()).result.trim();
 
-  var selectedTex = JSON.stringify(selectedText).toString().trim();
-  // return selectedTex;
-  console.log(selectedTex);
   var selectedTex = selectedTex.replace(/[^0-9+\-*Xx/.]/g, '');
+ 
 
   const sanitizedText = selectedTex;
   const operators = [ "+", "-","/","*","x","X" ];
@@ -46,40 +45,37 @@ function calculateSelectedExpression(selectedText) {
   var val1=0,val2=0,prev=0;
   var op='+';
   var i=0;
+
+
   while (i<lst.length){
-    if(lst[i]!=" "){
-      if (operators.includes(lst[i])){
-        prev=1;
-        op=lst[i];
-        i+=1
+    console.log("Hi"+i);
+
+    while(i<lst.length && lst[i]>='0' && lst[i]<='9'){
+      if(prev){
+        val2=val2+lst[i];
+
       }
       else{
-        // val2=0
-        if(prev){
-          //   while(lst[i]>='0' && lst[i]<='9'){
-          //   val2=val2*10+lst[i]*1;
-          //   i++;
-          // }
-          val2=lst[i]*1;
-          val1=evaluateExp(val1,val2,op);
-          prev=0;
-          i+=1;
-        }
-        else{
-          // val1=0
-          //   while(lst[i]>='0' && lst[i]<='9'){
-          //   val1=val1*10+lst[i]*1;
-          //   i++;
-          // }
-          val1=lst[i]*1;
-          i++;
-        }
+        val1=val1+lst[i];
       }
+      i+=1;
+    }
+    if(prev){
+      val2=val2*1;
+      val1=evaluateExp(val1,val2,op);
+      prev=0;
     }
     else{
-      i+=1
+      val1=val1*1;
     }
-    // i+=1;
+    if(operators.includes(lst[i])){
+      prev=1;
+      op=lst[i];
+    }
+
+    
+
+    i+=1;
     evaluatedExpression=val1;
   }
  
@@ -104,3 +100,38 @@ function evaluateExp(val1,val2,op){
 function getSelectedText() {
   return window.getSelection().toString();
 }
+
+    // if(lst[i]!=" "){
+    //   if (operators.includes(lst[i])){
+    //     prev=1;
+    //     op=lst[i];
+    //     i+=1
+    //   }
+    //   else{
+
+    //     if(prev){
+    //       val2=0;
+
+    //         while(i<lst.length && lst[i]>='0' && lst[i]<='9'){
+    //         val2=val2*10+lst[i]*1;
+    //         i++;
+    //       }
+    //       val2=lst[i]*1;
+    //       val1=evaluateExp(val1,val2,op);
+    //       prev=0;
+    //       i+=1;
+    //     }
+    //     else{
+    //       val1=0
+    //         while(i<lst.length && lst[i]>='0' && lst[i]<='9'){
+    //         val1=val1*10+lst[i]*1;
+    //         i++;
+    //       }
+    //       val1=lst[i]*1;
+    //       i++;
+    //     }
+    //   }
+    // }
+    // else{
+    //   i+=1
+    // }
