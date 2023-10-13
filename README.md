@@ -1,7 +1,7 @@
 
 # Calculator Browser Extension
 
-![Preview-Extension](https://github.com/VIROOPAKSHC/Calculator-Extension/assets/69083163/9e155d01-a012-4400-8326-222a1dcf3e99)
+![image](https://github.com/VIROOPAKSHC/Calculator-Extension/assets/69083163/80c22905-572f-421c-97f4-1a1242bbf35d)
 
 
 ## Overview
@@ -78,13 +78,14 @@ Here are some examples of how you can use the Calculator Browser Extension:
 
 ## Screenshots
 
-![image](https://github.com/VIROOPAKSHC/Calculator-Extension/assets/69083163/b9f75916-3168-40aa-baf8-97bc0b2a7879)
-![image](https://github.com/VIROOPAKSHC/Calculator-Extension/assets/69083163/39b78295-5b73-43f3-91d4-06e2b2688e41)
+![image](https://github.com/VIROOPAKSHC/Calculator-Extension/assets/69083163/4e02e559-9b8d-4b51-b1c6-5add44543822)
+![image](https://github.com/VIROOPAKSHC/Calculator-Extension/assets/69083163/8e7558a9-922f-428a-b1a6-7af677a894c6)
+
 
 
 ## Contributing
 
-You are welcome to contributions to the Calculator Browser Extension project. If you'd like to get involved, please follow these guidelines:
+You are welcome to contribute to the Calculator Browser Extension project. If you'd like to get involved, please follow these guidelines:
 
 - Fork the repository.
 
