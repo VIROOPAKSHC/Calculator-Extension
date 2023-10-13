@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const calculateButton = document.getElementById("calculateButton");
   const resultElement = document.getElementById("result");
-
+  const inputElement = document.getElementById("input");
   // Listen for the "Calculate" button click
   calculateButton.addEventListener("click", function () {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -14,13 +14,22 @@ document.addEventListener("DOMContentLoaded", function () {
         function: getSelectedText,
       },
       (selectedText) => {
-        // selectedExpression.textContent = "Selected Expression: ".concat(((selectedText)));
+        var sel=0;
+        if(inputElement.value){
+          selectedText=inputElement.value;
+          
+        }
+        else{
+          inputElement.value=JSON.parse(JSON.stringify(selectedText).substr(1,JSON.stringify(selectedText).length-2).toString()).result ;
+          sel=1;
+        }
+        
         try {
-          const result = calculateSelectedExpression(selectedText);
-          resultElement.textContent = `Result: ${result}`;
+          const result = calculateSelectedExpression(selectedText,sel);
+          resultElement.textContent = `= ${result}`;
         } catch (error) {
           resultElement.textContent = "Error: Invalid expression"+error;
-          alert(selectedText);
+      
         }
       }
     );
@@ -31,9 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Function to calculate the selected expression
-function calculateSelectedExpression(selectedText) {
-  
-  var selectedTex = JSON.parse(JSON.stringify(selectedText).substr(1,JSON.stringify(selectedText).length-2).toString()).result.trim();
+function calculateSelectedExpression(selectedText,flag) {
+  if(flag){
+    var selectedTex = JSON.parse(JSON.stringify(selectedText).substr(1,JSON.stringify(selectedText).length-2).toString()).result.trim();
+  }
+  else{
+    var selectedTex=selectedText.trim();
+  }
 
   var selectedTex = selectedTex.replace(/[^0-9+\-*Xx/.]/g, '');
  
@@ -64,6 +77,7 @@ function calculateSelectedExpression(selectedText) {
       val2=val2*1;
       val1=evaluateExp(val1,val2,op);
       prev=0;
+      val2=0;
     }
     else{
       val1=val1*1;
@@ -100,38 +114,3 @@ function evaluateExp(val1,val2,op){
 function getSelectedText() {
   return window.getSelection().toString();
 }
-
-    // if(lst[i]!=" "){
-    //   if (operators.includes(lst[i])){
-    //     prev=1;
-    //     op=lst[i];
-    //     i+=1
-    //   }
-    //   else{
-
-    //     if(prev){
-    //       val2=0;
-
-    //         while(i<lst.length && lst[i]>='0' && lst[i]<='9'){
-    //         val2=val2*10+lst[i]*1;
-    //         i++;
-    //       }
-    //       val2=lst[i]*1;
-    //       val1=evaluateExp(val1,val2,op);
-    //       prev=0;
-    //       i+=1;
-    //     }
-    //     else{
-    //       val1=0
-    //         while(i<lst.length && lst[i]>='0' && lst[i]<='9'){
-    //         val1=val1*10+lst[i]*1;
-    //         i++;
-    //       }
-    //       val1=lst[i]*1;
-    //       i++;
-    //     }
-    //   }
-    // }
-    // else{
-    //   i+=1
-    // }

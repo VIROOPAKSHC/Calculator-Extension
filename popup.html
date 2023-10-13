@@ -5,27 +5,45 @@
     body {
       width: 200px;
       padding: 10px;
+      background-color: #41B3A3;
+      color: #EDF5E1 ;
     }
 
     button {
-      background-color: #3498db;
+      background-color: #DAAD86;
       color: white;
       border: none;
       padding: 10px 20px;
       cursor: pointer;
       margin-top: 10px;
     }
+    h2{
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
 
+    }
+    @-webkit-keyframes glow {
+      from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+      }
+      to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+      }
+    }
   </style>
 </head>
 <body>
-  <h2 style="text-align: center">Calculator Extension</h2>
-  <div id="app" style="background-color:white;">
+  <h2 style="text-align: center; font-family: garamond;">Calculator Extension</h2>
+  <img src="icon.png">
+  <div id="app" style=" font-family: serif;">
     
     
-    <!-- <p id="selectedExpression">Selected Expression: </p> -->
-    <p id="result">Result: </p>
-    <button id=calculateButton >Calculate</button>
+    <p>Enter any mathematical expression or select any valid 2 operand expression from the webpage: </p>
+
+    <input type="text" id="input">
+    <p id="result"></p>
+    <button id=calculateButton style="font-family: garamond; align:center">Calculate</button>
   </div>
   <script src="popup.js"></script>
 </body>
