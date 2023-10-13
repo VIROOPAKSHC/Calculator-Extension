@@ -58,37 +58,57 @@ function calculateSelectedExpression(selectedText,flag) {
   var val1=0,val2=0,prev=0;
   var op='+';
   var i=0;
-
-
+  var neg=0;
   while (i<lst.length){
-    console.log("Hi"+i);
-
     while(i<lst.length && lst[i]>='0' && lst[i]<='9'){
       if(prev){
         val2=val2+lst[i];
-
       }
       else{
         val1=val1+lst[i];
       }
       i+=1;
     }
+
     if(prev){
       val2=val2*1;
+      if(neg){
+        val2=val2*(-1);
+        neg=0;
+        console.log("Negative -"+val2);
+      }
+      console.log(val1,val2,op);
       val1=evaluateExp(val1,val2,op);
       prev=0;
       val2=0;
     }
     else{
       val1=val1*1;
+      if(neg){
+        val1=val1*(-1);
+        neg=0;
+        console.log("Negative -"+val1);
+      }
     }
     if(operators.includes(lst[i])){
-      prev=1;
-      op=lst[i];
+      if(i>0 && !(operators.includes(lst[i+1])))
+      {
+        prev=1;
+        op=lst[i];  
+      }
+      else{
+        prev=1;
+        if(lst[i+1]=='-'){
+          neg=1;
+          op=lst[i];
+          i+=1;
+
+        }
+        else{
+          return "Invalid Expression";
+        }
+      }
     }
-
-    
-
     i+=1;
     evaluatedExpression=val1;
   }
